@@ -51,12 +51,11 @@ class custom_property(object):
     def __set__(self, instance, value):
         if instance is None:
             raise TypeError("can't modify custom class properties")
-        if '-' in value:
-            values = value.split('-')
-            values[0] = values[0].zfill(self.length)
-            value = '-'.join(values)
-        else:
-            value = value.zfill(self.length)
+        # value=123-4, len=4 -> 0123-4
+        # value=123-4, len=5 -> 00123-4
+        values = value.split('-')
+        values[0] = values[0].zfill(self.length)
+        value = '-'.join(values)
         self._instance_state[instance] = value
 
     def __get__(self, instance, class_):
