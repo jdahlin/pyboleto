@@ -45,6 +45,14 @@ class TestBancoItau(BoletoTestCase):
     def test_dv_agencia_conta_cedente(self):
         self.assertEqual(self.dados[0].dv_agencia_conta_cedente, 0)
 
+    def test_custom_properties(self):
+        props = self.dados[0].get_custom_properties()
+        self.assertEquals(len(props), 4)
+        self.assertEquals(props[0].name, 'agencia_cedente')
+        self.assertEquals(props[1].name, 'carteira')
+        self.assertEquals(props[2].name, 'conta_cedente')
+        self.assertEquals(props[3].name, 'nosso_numero')
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoItau)
 
 if __name__ == '__main__':

@@ -12,6 +12,7 @@
 """
 import datetime
 from decimal import Decimal
+import operator
 
 
 class BoletoException(Exception):
@@ -183,6 +184,23 @@ class BoletoData(object):
         self._sacado = None
         self._valor = None
         self._valor_documento = None
+
+    def get_custom_properties(self):
+        """Retorna uma lista de properidades que são necessarios para
+        prencher esse boleto.
+        :returns: lista de `properidades <custom_property>`
+        """
+        def get_props(props, cls):
+            for attr, value in cls.__dict__.items():
+                if attr in props:
+                    continue
+                if isinstance(value, custom_property):
+                    props[attr] = value
+
+        props = {}
+        for base in (self.__class__,) + self.__class__.__bases__:
+            get_props(props, base)
+        return sorted(props.values(), key=operator.attrgetter('name'))
 
     @property
     def barcode(self):

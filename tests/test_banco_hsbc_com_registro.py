@@ -41,6 +41,13 @@ class TestBancoHsbcComRegistro(BoletoTestCase):
     def test_dv_nosso_numero(self):
         self.assertEqual(self.dados[0].dv_nosso_numero, 0)
 
+    def test_custom_properties(self):
+        props = self.dados[0].get_custom_properties()
+        self.assertEquals(len(props), 3)
+        self.assertEquals(props[0].name, 'agencia_cedente')
+        self.assertEquals(props[1].name, 'conta_cedente')
+        self.assertEquals(props[2].name, 'nosso_numero')
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoHsbcComRegistro)
 
 

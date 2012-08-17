@@ -34,6 +34,14 @@ class TestBancoBrasil(BoletoTestCase):
             '00196490000002952950000007777777000008765418'
         )
 
+    def test_custom_properties(self):
+        props = self.dados[0].get_custom_properties()
+        self.assertEquals(len(props), 4)
+        self.assertEquals(props[0].name, 'agencia_cedente')
+        self.assertEquals(props[1].name, 'conta_cedente')
+        self.assertEquals(props[2].name, 'convenio')
+        self.assertEquals(props[3].name, 'nosso_numero')
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoBrasil)
 
 
