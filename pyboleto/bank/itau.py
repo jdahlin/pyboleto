@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-from ..data import BoletoData, custom_property
+from ..data import BoletoData, boleto_prop
 
 ### CAUTION - NÃO TESTADO ###
 
@@ -13,16 +13,16 @@ class BoletoItau(BoletoData):
     '''
 
     # Nosso numero (sem dv) com 8 digitos
-    nosso_numero = custom_property('nosso_numero', 8,
-                                   title='Nosso numero')
+    nosso_numero = boleto_prop('nosso_numero', 8,
+                               title='Nosso numero')
 
     # Conta (sem dv) com 5 digitos
-    conta_cedente = custom_property('conta_cedente', 5,
-                                    title='Conta cedente')
+    conta_cedente = boleto_prop('conta_cedente', 5,
+                                title='Conta cedente')
 
     #  Agência (sem dv) com 4 digitos
-    carteira = custom_property('carteira', 3,
-                               title='Carteira')
+    carteira = boleto_prop('carteira', 3,
+                           title='Carteira')
 
     def __init__(self):
         super(BoletoItau, self).__init__()

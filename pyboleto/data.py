@@ -24,7 +24,7 @@ class BoletoException(Exception):
 _EPOCH = datetime.date(1997, 10, 7)
 
 
-class custom_property(object):
+class boleto_prop(object):
     """Função para criar propriedades nos boletos
 
     Cria propriedades com getter, setter e delattr.
@@ -54,7 +54,7 @@ class custom_property(object):
         self._instance_state = {}
 
     def __repr__(self):
-        return '<custom_property name=%s length=%s>' % (
+        return '<boleto_prop name=%s length=%s>' % (
             self.name, self.length)
 
     def __set__(self, instance, value):
@@ -185,16 +185,16 @@ class BoletoData(object):
         self._valor = None
         self._valor_documento = None
 
-    def get_custom_properties(self):
+    def get_boleto_props(self):
         """Retorna uma lista de properidades que são necessarios para
         prencher esse boleto.
-        :returns: lista de `properidades <custom_property>`
+        :returns: lista de `properidades <boleto_prop>`
         """
         def get_props(props, cls):
             for attr, value in cls.__dict__.items():
                 if attr in props:
                     continue
-                if isinstance(value, custom_property):
+                if isinstance(value, boleto_prop):
                     props[attr] = value
 
         props = {}
@@ -289,24 +289,24 @@ class BoletoData(object):
         """
         return self.nosso_numero
 
-    nosso_numero = custom_property('nosso_numero', 13,
-                                   title='Nosso número')
+    nosso_numero = boleto_prop('nosso_numero', 13,
+                               title='Nosso número')
     """Nosso Número geralmente tem 13 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    agencia_cedente = custom_property('agencia_cedente', 4,
-                                      title='Agência cedente')
+    agencia_cedente = boleto_prop('agencia_cedente', 4,
+                                  title='Agência cedente')
     """Agência do Cedente geralmente tem 4 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    conta_cedente = custom_property('conta_cedente', 7,
-                                    title='Conta cedente')
+    conta_cedente = boleto_prop('conta_cedente', 7,
+                                title='Conta cedente')
     """Conta do Cedente geralmente tem 7 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..data import BoletoData, custom_property
+from ..data import BoletoData, boleto_prop
 
 
 class BoletoBB(BoletoData):
@@ -7,13 +7,13 @@ class BoletoBB(BoletoData):
         Gera Dados necessários para criação de boleto para o Banco do Brasil
     '''
 
-    agencia_cedente = custom_property('agencia_cedente', 4,
-                                    title='Agência cedente')
-    conta_cedente = custom_property('conta_cedente', 8,
-                                    title='Conta cedente')
+    agencia_cedente = boleto_prop('agencia_cedente', 4,
+                                  title='Agência cedente')
+    conta_cedente = boleto_prop('conta_cedente', 8,
+                                title='Conta cedente')
     # FIXME: Ele precisa um validador, por que tem que ser 6, 7 ou 8 digitos
-    convenio = custom_property('convenio', 8,
-                               title='Convenio', padding=False)
+    convenio = boleto_prop('convenio', 8,
+                           title='Convenio', padding=False)
 
     def __init__(self, format_nnumero):
         '''

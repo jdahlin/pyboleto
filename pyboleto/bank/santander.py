@@ -14,7 +14,7 @@
     :license: BSD, see LICENSE for more details.
 
 """
-from ..data import BoletoData, custom_property
+from ..data import BoletoData, boleto_prop
 
 
 class BoletoSantander(BoletoData):
@@ -22,15 +22,15 @@ class BoletoSantander(BoletoData):
         Gera Dados necessários para criação de boleto para o banco Santander
     '''
 
-    nosso_numero = custom_property('nosso_numero', 12,
-                                   title='Nosso numero')
+    nosso_numero = boleto_prop('nosso_numero', 12,
+                               title='Nosso numero')
 
     #: Também chamado de "ponto de venda"
-    agencia_cedente = custom_property('agencia_cedente', 4)
+    agencia_cedente = boleto_prop('agencia_cedente', 4)
 
     #: Também chamdo de código do cedente, se for uma conta de 9 dígitos
     #: ignorar os 2 primeiros
-    conta_cedente = custom_property('conta_cedente', 7)
+    conta_cedente = boleto_prop('conta_cedente', 7)
 
     def __init__(self):
         super(BoletoSantander, self).__init__()

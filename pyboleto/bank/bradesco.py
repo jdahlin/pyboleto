@@ -9,7 +9,7 @@
     :license: BSD, see LICENSE for more details.
 
 """
-from ..data import BoletoData, custom_property
+from ..data import BoletoData, boleto_prop
 
 
 class BoletoBradesco(BoletoData):
@@ -17,12 +17,12 @@ class BoletoBradesco(BoletoData):
         Gera Dados necessários para criação de boleto para o banco Bradesco
     '''
 
-    nosso_numero = custom_property('nosso_numero', 11,
-                                   title='Nosso nÃºmero')
-    agencia_cedente = custom_property('agencia_cedente', 4,
-                                   title='Agéncia cedente')
-    conta_cedente = custom_property('conta_cedente', 7,
-                                    title='Conta cedente')
+    nosso_numero = boleto_prop('nosso_numero', 11,
+                               title='Nosso nÃºmero')
+    agencia_cedente = boleto_prop('agencia_cedente', 4,
+                                  title='Agéncia cedente')
+    conta_cedente = boleto_prop('conta_cedente', 7,
+                                title='Conta cedente')
 
     def __init__(self):
         super(BoletoBradesco, self).__init__()

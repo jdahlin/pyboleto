@@ -40,8 +40,8 @@ class TestBancoBanrisul(BoletoTestCase):
         self.assertEqual(self.dados[0].campo_livre,
                          '2111029000150228325634059')
 
-    def test_custom_properties(self):
-        props = self.dados[0].get_custom_properties()
+    def test_boleto_props(self):
+        props = self.dados[0].get_boleto_props()
         self.assertEquals(len(props), 3)
         self.assertEquals(props[0].name, 'agencia_cedente')
         self.assertEquals(props[1].name, 'conta_cedente')
