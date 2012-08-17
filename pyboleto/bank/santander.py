@@ -22,7 +22,8 @@ class BoletoSantander(BoletoData):
         Gera Dados necessários para criação de boleto para o banco Santander
     '''
 
-    nosso_numero = custom_property('nosso_numero', 12)
+    nosso_numero = custom_property('nosso_numero', 12,
+                                   title='Nosso numero')
 
     #: Também chamado de "ponto de venda"
     agencia_cedente = custom_property('agencia_cedente', 4)

@@ -7,8 +7,10 @@ class BoletoBB(BoletoData):
         Gera Dados necessários para criação de boleto para o Banco do Brasil
     '''
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
-    conta_cedente = custom_property('conta_cedente', 8)
+    agencia_cedente = custom_property('agencia_cedente', 4,
+                                    title='Agência cedente')
+    conta_cedente = custom_property('conta_cedente', 8,
+                                    title='Conta cedente')
 
     def __init__(self, format_convenio, format_nnumero):
         '''

@@ -10,7 +10,8 @@ class BoletoHsbc(BoletoData):
         Gera Dados necessários para criação de boleto para o banco HSBC
     '''
 
-    numero_documento = custom_property('numero_documento', 13)
+    numero_documento = custom_property('numero_documento', 13,
+                                       title='Número documento')
 
     def __init__(self):
         super(BoletoHsbc, self).__init__()
@@ -52,7 +53,8 @@ class BoletoHsbcComRegistro(BoletoData):
         com registro
     '''
     # Nosso numero (sem dv) sao 10 digitos
-    nosso_numero = custom_property('nosso_numero', 10)
+    nosso_numero = custom_property('nosso_numero', 10,
+                                   title='Nosso número')
 
     def __init__(self):
         super(BoletoHsbcComRegistro, self).__init__()

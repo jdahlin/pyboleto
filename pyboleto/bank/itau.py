@@ -13,12 +13,16 @@ class BoletoItau(BoletoData):
     '''
 
     # Nosso numero (sem dv) com 8 digitos
-    nosso_numero = custom_property('nosso_numero', 8)
+    nosso_numero = custom_property('nosso_numero', 8,
+                                   title='Nosso numero')
+
     # Conta (sem dv) com 5 digitos
-    conta_cedente = custom_property('conta_cedente', 5)
+    conta_cedente = custom_property('conta_cedente', 5,
+                                    title='Conta cedente')
+
     #  Agência (sem dv) com 4 digitos
-    agencia_cedente = custom_property('agencia_cedente', 4)
-    carteira = custom_property('carteira', 3)
+    carteira = custom_property('carteira', 3,
+                               title='Carteira')
 
     def __init__(self):
         super(BoletoItau, self).__init__()

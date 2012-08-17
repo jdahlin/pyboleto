@@ -9,14 +9,16 @@ class BoletoCaixa(BoletoData):
 
     '''
 
-    conta_cedente = custom_property('conta_cedente', 11)
+    conta_cedente = custom_property('conta_cedente', 11,
+                                    title='Conta cedente')
     '''
         Este numero tem o inicio fixo
         Carteira SR: 80, 81 ou 82
         Carteira CR: 90 (Confirmar com gerente qual usar)
 
     '''
-    nosso_numero = custom_property('nosso_numero', 10)
+    nosso_numero = custom_property('nosso_numero', 10,
+                                   title='Nosso número')
 
     def __init__(self):
         super(BoletoCaixa, self).__init__()

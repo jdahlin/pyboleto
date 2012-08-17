@@ -41,11 +41,14 @@ class custom_property(object):
     :type name: string
     :param length: Tamanho para preencher com '0' na frente.
     :type length: integer
+    :param title: Descrição do campo
+    :type title: string ou None
 
     """
-    def __init__(self, name, length):
+    def __init__(self, name, length, title=None):
         self.name = name
         self.length = length
+        self.title = title
         self._instance_state = {}
 
     def __set__(self, instance, value):
@@ -258,21 +261,24 @@ class BoletoData(object):
         """
         return self.nosso_numero
 
-    nosso_numero = custom_property('nosso_numero', 13)
+    nosso_numero = custom_property('nosso_numero', 13,
+                                   title='Nosso número')
     """Nosso Número geralmente tem 13 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    agencia_cedente = custom_property('agencia_cedente', 4)
+    agencia_cedente = custom_property('agencia_cedente', 4,
+                                      title='Agência cedente')
     """Agência do Cedente geralmente tem 4 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
 
     """
 
-    conta_cedente = custom_property('conta_cedente', 7)
+    conta_cedente = custom_property('conta_cedente', 7,
+                                    title='Conta cedente')
     """Conta do Cedente geralmente tem 7 posições
 
     Algumas subclasses podem alterar isso dependendo das normas do banco
