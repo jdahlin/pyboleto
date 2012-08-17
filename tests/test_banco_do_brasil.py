@@ -11,7 +11,7 @@ class TestBancoBrasil(BoletoTestCase):
     def setUp(self):
         self.dados = []
         for i in range(3):
-            d = BoletoBB(7, 1)
+            d = BoletoBB(1)
             d.carteira = '18'
             d.data_documento = datetime.date(2011, 3, 8)
             d.data_vencimento = datetime.date(2011, 3, 8)

@@ -15,12 +15,11 @@ class BoletoBB(BoletoData):
     convenio = custom_property('convenio', 8,
                                title='Convenio', padding=False)
 
-    def __init__(self, format_convenio, format_nnumero):
+    def __init__(self, format_nnumero):
         '''
             Construtor para boleto do Banco deo Brasil
 
             Args:
-                format_convenio Formato do convenio 6, 7 ou 8
                 format_nnumero Formato nosso numero 1 ou 2
         '''
         super(BoletoBB, self).__init__()
@@ -28,9 +27,6 @@ class BoletoBB(BoletoData):
         self.codigo_banco = "001"
         self.carteira = 18
         self.logo_image = "logo_bb.jpg"
-
-        # Size of convenio 6, 7 or 8
-        self.format_convenio = format_convenio
 
         #  Nosso Numero format. 1 or 2
         #  1: Nosso Numero with 5 positions
