@@ -30,8 +30,8 @@ import _ast
 import sys
 import unittest
 
-from .testutils import SourceTest
-from .compat import skipIf
+from testutils import SourceTest
+from compat import skipIf
 
 
 try:

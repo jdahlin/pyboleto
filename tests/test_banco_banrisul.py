@@ -4,7 +4,7 @@ import unittest
 
 from pyboleto.bank.banrisul import BoletoBanrisul
 
-from .testutils import BoletoTestCase
+from testutils import BoletoTestCase
 
 
 class TestBancoBanrisul(BoletoTestCase):

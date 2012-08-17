@@ -4,7 +4,7 @@ import datetime
 
 from pyboleto.bank.real import BoletoReal
 
-from .testutils import BoletoTestCase
+from testutils import BoletoTestCase
 
 
 class TestBancoReal(BoletoTestCase):

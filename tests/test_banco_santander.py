@@ -4,7 +4,7 @@ import datetime
 
 from pyboleto.bank.santander import BoletoSantander
 
-from .testutils import BoletoTestCase
+from testutils import BoletoTestCase
 
 
 class TestBancoSantander(BoletoTestCase):

@@ -4,7 +4,7 @@ import datetime
 
 from pyboleto.bank.bradesco import BoletoBradesco
 
-from .testutils import BoletoTestCase
+from testutils import BoletoTestCase
 
 
 class TestBancoBradesco(BoletoTestCase):

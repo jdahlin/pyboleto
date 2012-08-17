@@ -4,7 +4,7 @@ import datetime
 
 from pyboleto.bank.hsbc import BoletoHsbc
 
-from .testutils import BoletoTestCase
+from testutils import BoletoTestCase
 
 
 class TestBancoHsbc(BoletoTestCase):

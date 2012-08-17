@@ -14,7 +14,7 @@ from xml.etree.ElementTree import fromstring, tostring
 
 import pyboleto
 
-from .compat import skipIf
+from compat import skipIf
 
 
 try:
