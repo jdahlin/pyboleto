@@ -15,13 +15,22 @@ from decimal import Decimal
 import operator
 
 
+BANCOS_IMPLEMENTADOS = {
+    '001': 'bancodobrasil.BoletoBB',
+    '041': 'banrisul.BoletoBanrisul',
+    '237': 'bradesco.BoletoBradesco',
+    '104': 'caixa.BoletoCaixa',
+    '399': 'hsbc.BoletoHsbc',
+    '341': 'itau.BoletoItau',
+    '356': 'real.BoletoReal',
+}
+_EPOCH = datetime.date(1997, 10, 7)
+
+
 class BoletoException(Exception):
     """ Exceções para erros no pyboleto"""
     def __init__(self, message):
         Exception.__init__(self, message)
-
-
-_EPOCH = datetime.date(1997, 10, 7)
 
 
 class boleto_prop(object):
@@ -184,6 +193,26 @@ class BoletoData(object):
         self._sacado = None
         self._valor = None
         self._valor_documento = None
+
+    @classmethod
+    def get_class_for_codigo(cls, banco_codigo):
+        """Retorna a classe que implementa o banco
+
+        :param banco_codigo:
+        :type banco_codigo: string
+        :return: Classo do Banco subclasse de :class:`pyboleto.data.BoletoData`
+        :rtype: :class:`pyboleto.data.BoletoData`
+        """
+        banco = getattr(BANCOS_IMPLEMENTADOS, banco_codigo, None)
+        if banco is None:
+            raise BoletoException(
+                'Banco %s não é suportado.' % (banco_codigo, ))
+
+        banco_path, banco_class = banco.split('.')
+
+        mod = __import__('pyboleto.bank.' + banco_path,
+                         globals(), locals(), ' ')
+        return getattr(mod, banco_class)
 
     def get_boleto_props(self):
         """Retorna uma lista de properidades que são necessarios para

@@ -60,9 +60,9 @@ class Boleto(models.Model):
         return self.numero_documento
 
     def print_pdf_pagina(self, pdf_file):
-        from .. import bank
+        from ..bank import BoletoData
 
-        ClasseBanco = bank.get_class_for_codigo(self.codigo_banco)
+        ClasseBanco = BoletoData.get_class_for_codigo(self.codigo_banco)
 
         boleto_dados = ClasseBanco()
 
