@@ -45,26 +45,32 @@ class custom_property(object):
     :type title: string ou None
 
     """
-    def __init__(self, name, length, title=None):
+    def __init__(self, name, length, title=None, padding=True):
         self.name = name
         self.length = length
+        self.padding = padding
         self.title = title
         self._instance_state = {}
 
     def __set__(self, instance, value):
         if instance is None:
             raise TypeError("can't modify custom class properties")
-        # value=123-4, len=4 -> 0123-4
-        # value=123-4, len=5 -> 00123-4
-        values = value.split('-')
-        values[0] = values[0].zfill(self.length)
-        value = '-'.join(values)
+        if self.padding:
+            # value=123-4, len=4 -> 0123-4
+            # value=123-4, len=5 -> 00123-4
+            values = value.split('-')
+            values[0] = values[0].zfill(self.length)
+            value = '-'.join(values)
         self._instance_state[instance] = value
 
     def __get__(self, instance, class_):
         if instance is None:
             return self
-        return self._instance_state.get(instance, '0' * self.length)
+        if self.padding:
+            value = '0' * self.length
+        else:
+            value = ''
+        return self._instance_state.get(instance, value)
 
 
 class BoletoData(object):
