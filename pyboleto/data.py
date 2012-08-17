@@ -52,6 +52,10 @@ class custom_property(object):
         self.title = title
         self._instance_state = {}
 
+    def __repr__(self):
+        return '<custom_property name=%s length=%s>' % (
+            self.name, self.length)
+
     def __set__(self, instance, value):
         if instance is None:
             raise TypeError("can't modify custom class properties")
