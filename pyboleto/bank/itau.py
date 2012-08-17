@@ -1,4 +1,4 @@
-# -*- coding: utf-8
+# -*- coding: utf-8 -*-
 from ..data import BoletoData, boleto_prop
 
 ### CAUTION - NÃO TESTADO ###
