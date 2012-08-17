@@ -11,6 +11,9 @@ class BoletoBB(BoletoData):
                                     title='Agência cedente')
     conta_cedente = custom_property('conta_cedente', 8,
                                     title='Conta cedente')
+    # FIXME: Ele precisa um validador, por que tem que ser 6, 7 ou 8 digitos
+    convenio = custom_property('convenio', 8,
+                               title='Convenio', padding=False)
 
     def __init__(self, format_convenio, format_nnumero):
         '''
@@ -47,25 +50,18 @@ class BoletoBB(BoletoData):
 
     def _set_nosso_numero(self, val):
         val = str(val)
-        if self.format_convenio == 6:
+        if len(self.convenio) == 6:
             if self.format_nnumero == 1:
                 nn = val.zfill(5)
             elif self.format_nnumero == 2:
                 nn = val.zfill(17)
-        elif self.format_convenio == 7:
+        elif len(self.convenio) == 7:
             nn = val.zfill(10)
-        elif self.format_convenio == 8:
+        elif len(self.convenio) == 8:
             nn = val.zfill(9)
         self._nosso_numero = nn
 
     nosso_numero = property(_get_nosso_numero, _set_nosso_numero)
-
-    def _get_convenio(self):
-        return self._convenio
-
-    def _set_convenio(self, val):
-        self._convenio = str(val).ljust(self.format_convenio, '0')
-    convenio = property(_get_convenio, _set_convenio)
 
     @property
     def agencia_conta_cedente(self):
@@ -82,11 +78,11 @@ class BoletoBB(BoletoData):
 
     @property
     def campo_livre(self):
-        if self.format_convenio in (7, 8):
+        if len(self.convenio) in (7, 8):
             content = "000000%s%s%s" % (self.convenio,
                                          self.nosso_numero,
                                          self.carteira)
-        elif self.format_convenio == 6:
+        elif len(self.convenio) == 6:
             if self.format_nnumero == 1:
                 content = "%s%s%s%s%s" % (self.convenio,
                                            self.nosso_numero,
