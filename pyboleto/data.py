@@ -164,6 +164,9 @@ class BoletoData(object):
         self.cedente_bairro = kwargs.pop('cedente_bairro', "")
         self.cedente_cep = kwargs.pop('cedente_cep', "")
         self.cedente_documento = kwargs.pop('cedente_documento', "")
+        self.cedente_tipo_documento = kwargs.pop('cedente_tipo_documento', "CNPJ")
+        if self.cedente_tipo_documento not in ['CPF', 'CNPJ']:
+            raise TypeError("aceite tem que ser 'CPF' ou 'CNPJ'")
         self.codigo_banco = kwargs.pop('codigo_banco', "")
         self.conta_cedente = kwargs.pop('conta_cedente', "")
         self.data_documento = kwargs.pop('data_documento', "")
@@ -178,8 +181,13 @@ class BoletoData(object):
         self.moeda = kwargs.pop('moeda', "9")
         self.numero_documento = kwargs.pop('numero_do_documento', "")
         self.quantidade = kwargs.pop('quantidade', "")
+
         self.sacado_nome = kwargs.pop('sacado_nome', "")
         self.sacado_documento = kwargs.pop('sacado_documento', "")
+        self.sacado_tipo_documento = kwargs.pop('sacado_tipo_documento', "CNPJ")
+        if self.sacado_tipo_documento not in ['CPF', 'CNPJ']:
+            raise TypeError("aceite tem que ser 'CPF' ou 'CNPJ'")
+
         self.sacado_cidade = kwargs.pop('sacado_cidade', "")
         self.sacado_uf = kwargs.pop('sacado_uf', "")
         self.sacado_endereco = kwargs.pop('sacado_endereco', "")
