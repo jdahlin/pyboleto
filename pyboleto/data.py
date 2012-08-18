@@ -155,6 +155,9 @@ class BoletoData(object):
         #        otherwise the printed value might diffent from the value in
         #        the barcode.
         self.aceite = kwargs.pop('aceite', "N")
+        if self.aceite not in ['A', 'N']:
+            raise TypeError("aceite tem que ser 'A' ou 'N'")
+
         self.agencia_cedente = kwargs.pop('agencia_cedente', "")
         self.carteira = kwargs.pop('carteira', "")
         self.cedente = kwargs.pop('cedente', "")
