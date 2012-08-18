@@ -155,9 +155,10 @@ def pdftoxml(filename, output):
 
 
 class BoletoTestCase(unittest.TestCase):
-    def _get_expected(self, bank, generated):
+    def _get_expected(self, bank, generated, directory, suffix):
         fname = os.path.join(os.path.dirname(pyboleto.__file__),
-                             "..", "tests", "xml", bank + '-expected.xml')
+                             "..", "tests", directory,
+                             bank + '-expected.' + suffix)
         if not os.path.exists(fname):
             open(fname, 'w').write(open(generated).read())
         return fname
@@ -176,7 +177,8 @@ class BoletoTestCase(unittest.TestCase):
 
         generated = filename + '.xml'
         pdftoxml(filename, generated)
-        expected = self._get_expected('Triplo-' + bank, generated)
+        expected = self._get_expected('Triplo-' + bank,
+                                      generated, "xml", "xml")
         diff = diff_pdf_htmls(expected, generated)
         if diff:
             self.fail("Error while checking xml for %r:\n%s" % (
@@ -197,7 +199,21 @@ class BoletoTestCase(unittest.TestCase):
 
         generated = filename + '.xml'
         pdftoxml(filename, generated)
-        expected = self._get_expected(bank, generated)
+        expected = self._get_expected(bank, generated, "xml", "xml")
+        diff = diff_pdf_htmls(expected, generated)
+        if diff:
+            self.fail("Error while checking xml for %r:\n%s" % (
+                bank, diff))
+        os.unlink(generated)
+
+    def check_remessa(self, remessa):
+        bank = type(remessa.boleto).__name__
+
+        generated = tempfile.mktemp(prefix="pyboleto-",
+                                    suffix=".rem")
+        data = remessa.dados_como_string()
+        open(generated, 'w').write(data)
+        expected = self._get_expected(bank, generated, "cnab240", "rem")
         diff = diff_pdf_htmls(expected, generated)
         if diff:
             self.fail("Error while checking xml for %r:\n%s" % (
