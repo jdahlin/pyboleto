@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import unittest
 import datetime
+import decimal
+import unittest
 
 from pyboleto.bank.itau import BoletoItau
 
@@ -52,6 +53,44 @@ class TestBancoItau(BoletoTestCase):
         self.assertEquals(props[1].name, 'carteira')
         self.assertEquals(props[2].name, 'conta_cedente')
         self.assertEquals(props[3].name, 'nosso_numero')
+
+    def testArquivo(self):
+        boleto = BoletoItau()
+        boleto.carteira = '109'
+        boleto.especie_documento = 8
+        boleto.aceite = 'A'
+        boleto.data_vencimento = datetime.date(2012, 7, 30)
+        boleto.data_documento = datetime.date(2012, 6, 27)
+        boleto.data_processamento = datetime.date(2009, 10, 19)
+        boleto.valor_documento = decimal.Decimal("100.00")
+        boleto.nosso_numero = '99999999'
+        boleto.numero_documento = '9999999999'
+
+        # Cedente
+        boleto.agencia_cedente = '4459'
+        boleto.conta_cedente = '17600'
+        boleto.cedente = u'TRACY TECNOLOGIA LTDA ME'
+        boleto.cedente_documento = 15594050000111
+        boleto.cedente_tipo_documento = 'CNPJ'
+
+        # Sacado
+        boleto.sacado_nome =  u'JESUS DO CEU'
+        boleto.sacado_documento = 83351622120
+        boleto.sacado_tipo_documento = 'CPF'
+        boleto.sacado_cidade = u'PARAISO DE DEUS'
+        boleto.sacado_uf = 'SP'
+        boleto.sacado_endereco = u'RUA AVENIDA DO CEU, 666'
+        boleto.sacado_bairro = u'JD PARAISO'
+        boleto.sacado_cep = '60606666'
+
+        # FIXME: Standardize this and move to BoletoData
+        boleto.identificacao_titulo = u'BOLETO DE TESTE'
+        boleto.codigo_protesto = 3
+        boleto.juros_mora_taxa_dia = decimal.Decimal('2.00')
+
+        data = datetime.datetime(2012, 6, 27, 11, 20, 0)
+        remessa = boleto.cnab240_remessa(contador=900002, data=data)
+        self.check_remessa(remessa)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestBancoItau)
 
